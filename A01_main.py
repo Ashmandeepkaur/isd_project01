@@ -103,7 +103,7 @@ def main():
 
     # 10. Attempt to withdraw a negative value from the BankAccount create in step 3. 
     try:
-        bank_account.withdraw(-200)
+        bank_account.withdraw (-200)
     except ValueError as e:
         print(f"Error during withdrawal: {e}")
 
