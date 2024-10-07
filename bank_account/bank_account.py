@@ -1,4 +1,12 @@
-class BankAccount:
+"""
+Description: Module 1 Assignment: BankAccount class
+Author: Ashmandeep Kaur
+"""
+
+from datetime import date
+from abc import ABC, abstractmethod
+class BankAccount(ABC):
+
     """
     A class representing a bank account.
 
@@ -17,8 +25,9 @@ class BankAccount:
         __str__():
             Returns a string representation of the bank account.
     """
+    BASE_SERVICE_CHARGE = 0.50
 
-    def __init__(self, account_number: int, client_number: int, balance: float = 0.0):
+    def __init__(self, account_number: int, client_number: int, balance: float, date_created: date):
         """
         Initializes a new BankAccount instance.
 
@@ -42,6 +51,11 @@ class BankAccount:
             self._balance = float(balance)
         except ValueError:
             self._balance = 0.0
+
+        if not isinstance(date_created, date):
+           raise ValueError("Date created has an invalid type.")
+        self.__date_created = date_created
+
 
     @property
     def account_number(self):
@@ -131,6 +145,10 @@ class BankAccount:
         
         self.update_balance(-amount)
 
+    @abstractmethod
+    def get_service_charges(self) -> float:
+        return self.BASE_SERVICE_CHARGE
+
     def __str__(self):
         """
         Returns a string representation of the bank account.
@@ -139,5 +157,3 @@ class BankAccount:
             str: A string summarizing the account number and balance.
         """
         return f"Account Number: {self._account_number} Balance: ${self._balance:,.2f}\n"
-
-
