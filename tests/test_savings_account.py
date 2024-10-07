@@ -5,18 +5,18 @@ from datetime import date
 class TestSavingsAccount(unittest.TestCase):
 
     def setUp(self):
-        self.account = SavingsAccount(123456, 67890, 1000.00, date.today(), 50.00)
+        self.account = SavingsAccount(12345, 67890, 1000.00, date.today(), 50.00)
 
     def test_initialization_valid_minimum_balance(self):
         self.assertEqual(self.account.minimum_balance, 50.00)
 
     def test_initialization_invalid_minimum_balance(self):
-        account = SavingsAccount(123456, 67890, 1000.00, date.today(), "invalid")
+        account = SavingsAccount(12345, 67890, 1000.00, date.today(), "invalid")
         self.assertEqual(account.minimum_balance, 50.00)
 
     def test_str_method(self):
         expected_str = (
-            "Account Number: 123456 Balance: $1,000.00\n"
+            "Account Number: 12345 Balance: $1,000.00\n"
             "Minimum Balance: $50.00 Account Type: Savings"
         )
         self.assertEqual(str(self.account), expected_str)
