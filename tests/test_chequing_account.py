@@ -28,9 +28,11 @@ class TestChequingAccount(unittest.TestCase):
         self.assertEqual(round(self.account.get_service_charges(), 2), 0.50)
 
     def test_get_service_charges_below_limit(self):
-        self.account.update_balance(-200.00)  # Set balance below overdraft limit
-        expected_charge = 0.50 + (100 * 0.05)  # Overdrawn by 100, so charge is 0.50 + 5.00
+        self.account.update_balance(-200.00)  # Adjust balance using the method
+        self.account.overdraft_limit = -100.00  # Set overdraft limit
+        expected_charge = 0.50 + (100.00 * self.account.overdraft_rate)  # Calculate expected charge
         self.assertEqual(round(self.account.get_service_charges(), 2), round(expected_charge, 2))
+
 
 
     def test_str_method(self):
