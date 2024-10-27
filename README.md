@@ -10,6 +10,11 @@ Ashmandeep Kaur
 ## Assignment
 Assignment 1: Classes, Encapsulation and Unit Test Planning.
 
+Assignment 2: Applying Object-Oriented Design
+
+Assignment 3: Applying Design Patterns
+
+
 ## Encapsulation
 Encapsulation is a key principle of object-oriented programming that involves bundling the data (attributes) and methods (functions) that operate on the data into a single unit or class.
 

@@ -1,3 +1,4 @@
+from datetime import date
 from bank_account.bank_account import BankAccount
 
 class SavingsAccount(BankAccount):
@@ -13,15 +14,16 @@ class SavingsAccount(BankAccount):
     SERVICE_CHARGE_PREMIUM = 2.00
     BASE_SERVICE_CHARGE = 0.50
 
-    def __init__(self, account_number, client_number, balance, opening_date, minimum_balance):
+    def __init__(self, account_number: int, client_number: int, balance: float,
+                 opening_date: date, minimum_balance: float) -> None:
         """
         Initialize a SavingsAccount instance.
 
-        :param account_number: Unique identifier for the bank account.
-        :param client_number: Identifier for the client.
-        :param balance: Initial balance of the account.
-        :param opening_date: Date the account was opened.
-        :param minimum_balance: Minimum balance required to avoid additional service charges.
+        :args account_number: Unique identifier for the bank account.
+        :args client_number: Identifier for the client.
+        :args balance: Initial balance of the account.
+        :args opening_date: Date the account was opened.
+        :args minimum_balance: Minimum balance required to avoid additional service charges.
         """
         super().__init__(account_number, client_number, balance, opening_date)
         try:
@@ -29,7 +31,7 @@ class SavingsAccount(BankAccount):
         except (ValueError, TypeError):
             self.minimum_balance = 50.00  # Default minimum balance
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Return a string representation of the SavingsAccount instance.
 
@@ -40,7 +42,7 @@ class SavingsAccount(BankAccount):
         return (f"Account Number: {self.account_number} Balance: ${self.balance:,.2f}\n"
                 f"Minimum Balance: ${self.minimum_balance:,.2f} Account Type: Savings")
 
-    def get_service_charges(self):
+    def get_service_charges(self) -> float:
         """
         Calculate service charges based on the current balance.
 
@@ -54,22 +56,22 @@ class SavingsAccount(BankAccount):
         else:
             return self.BASE_SERVICE_CHARGE * self.SERVICE_CHARGE_PREMIUM
 
-    def deposit(self, amount):
+    def deposit(self, amount: float) -> None:
         """
         Deposit a specified amount into the savings account.
 
-        :param amount: The amount to be deposited.
+        :args amount: The amount to be deposited.
         :raises ValueError: If the deposit amount is not positive.
         """
         if amount <= 0:
             raise ValueError(f"Deposit amount: ${amount} must be positive.")
         self.update_balance(amount)
 
-    def withdraw(self, amount):
+    def withdraw(self, amount: float) -> None:
         """
         Withdraw a specified amount from the savings account.
 
-        :param amount: The amount to be withdrawn.
+        :args amount: The amount to be withdrawn.
         :raises ValueError: If the withdrawal amount is not positive or if it would reduce the balance below the minimum.
         """
         if amount <= 0:

@@ -1,47 +1,57 @@
-from bank_account.bank_account import BankAccount
+from datetime import date
 
-class ChequingAccount(BankAccount):
-    BASE_SERVICE_CHARGE = 0.50  # Base service charge constant
+class ChequingAccount:
+    def __init__(self, account_number: int, client_number: int, balance: float,
+                 creation_date: date, overdraft_limit: float = -100.00,
+                 overdraft_rate: float = 0.05) -> None:
+        self._account_number = account_number
+        self._client_number = client_number
+        self._balance = balance
+        self._creation_date = creation_date
+        self._overdraft_limit = (
+            overdraft_limit if isinstance(overdraft_limit, (int, float)) else -100.00
+        )
+        self._overdraft_rate = (
+            overdraft_rate if isinstance(overdraft_rate, (int, float)) else 0.05
+        )
 
-    def __init__(self, account_number, client_number, balance, date_created, overdraft_limit, overdraft_rate):
+    @property
+    def overdraft_limit(self) -> float:
+        return self._overdraft_limit
+
+    @overdraft_limit.setter
+    def overdraft_limit(self, value: float) -> None:
+        if isinstance(value, (int, float)):
+            self._overdraft_limit = value
+
+    @property
+    def overdraft_rate(self) -> float:
+        return self._overdraft_rate
+
+    @overdraft_rate.setter
+    def overdraft_rate(self, value: float) -> None:
+        if isinstance(value, (int, float)):
+            self._overdraft_rate = value
+
+    def update_balance(self, amount: float) -> None:
+        self._balance += amount
+
+    def get_service_charges(self) -> float:
         """
-        Initialize a ChequingAccount instance.
+        Calculate service charges based on the current balance.
 
-        :param account_number: Unique identifier for the bank account.
-        :param client_number: Identifier for the client.
-        :param balance: Initial balance of the account.
-        :param date_created: Date the account was created.
-        :param overdraft_limit: Maximum amount the account can be overdrawn.
-        :param overdraft_rate: Interest rate charged on the overdrawn amount.
+        If the balance exceeds the overdraft limit, a service charge is applied.
+
+        :return: Total service charges for the account.
         """
-        super().__init__(account_number, client_number, balance, date_created)
+        excess = max(0.0, self._overdraft_limit - self._balance)
+        service_charge = 0.50 + (excess * self._overdraft_rate)
+        return self.BASE_SERVICE_CHARGE + (excess * self.__overdraft_rate)
 
-        # Validate overdraft_limit
-        try:
-            self.overdraft_limit = float(overdraft_limit)
-        except (ValueError, TypeError):
-            self.overdraft_limit = -100.00  # Default overdraft limit
 
-        # Validate overdraft_rate
-        try:
-            self.overdraft_rate = float(overdraft_rate)
-        except (ValueError, TypeError):
-            self.overdraft_rate = 0.05  # Default overdraft rate
-
-    def __str__(self):
-        """
-        Return a string representation of the ChequingAccount instance.
-
-        :return: String containing account details including overdraft information.
-        """
-        return (f"{super().__str__()}"
-                f"Overdraft Limit: ${self.overdraft_limit:,.2f} "
-                f"Overdraft Rate: {self.overdraft_rate * 100:.2f}% "
-                f"Account Type: Chequing")
-
-    def get_service_charges(self):
-        """Calculate service charges based on the balance."""
-        if self.balance < self.overdraft_limit:
-           overdrawn_amount = self.overdraft_limit - self.balance  # This will give a positive amount
-           return self.BASE_SERVICE_CHARGE + (overdrawn_amount * self.overdraft_rate)  # Calculate the additional charge
-        return self.BASE_SERVICE_CHARGE  # Just the base charge if within limit
+    def __str__(self) -> str:
+        return (
+            f"Account Number: {self._account_number} Balance: ${self._balance:,.2f}\n"
+            f"Overdraft Limit: ${self._overdraft_limit:.2f} "
+            f"Overdraft Rate: {self._overdraft_rate * 100:.2f}% Account Type: Chequing"
+        )
