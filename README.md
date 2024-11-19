@@ -14,6 +14,8 @@ Assignment 2: Applying Object-Oriented Design
 
 Assignment 3: Applying Design Patterns
 
+Assignment 4: Programming Paradigms
+
 
 ## Encapsulation
 Encapsulation is a key principle of object-oriented programming that involves bundling the data (attributes) and methods (functions) that operate on the data into a single unit or class.
@@ -59,3 +61,16 @@ In this banking application, the Observer Pattern is utilized to notify clients 
 - Real-time Notifications: Clients receive immediate notifications for important account activities, improving their awareness and ability to manage their finances effectively.
 
 By implementing the Observer Pattern, the application ensures that clients remain informed about critical changes in their bank accounts, enhancing user experience and promoting proactive financial management.
+
+
+
+Event-Driven Programming Paradigm:
+In this application, the Event-Driven Programming (EDP) paradigm is used to handle user interactions and system responses in a dynamic, responsive manner. The main components of the application are designed to react to events triggered by user actions, such as clicking buttons, selecting rows in tables, or entering data into fields.
+
+Key aspects of EDP in this application include:
+
+1.Signal-Slot Mechanism: The application leverages the signal-slot mechanism in PySide6 (Qt framework) to establish connections between user actions (signals) and corresponding methods (slots). For example, when a user clicks the "Lookup" button, it triggers a signal that connects to the on_lookup_client method, which retrieves and displays client information.
+
+2.Event Handlers: Methods like on_lookup_client, on_select_account, on_apply_transaction, and on_exit serve as event handlers that respond to user actions. Each of these methods processes the user's input, performs the appropriate operations (like retrieving data or updating the interface), and may display messages or open new windows.
+
+3.Real-Time Updates: When a transaction is made (e.g., a deposit or withdrawal), the application updates the relevant data in real time. The AccountDetailsWindow sends a signal to the ClientLookupWindow when a balance changes, ensuring that the client’s bank account details are immediately reflected in the main window.
