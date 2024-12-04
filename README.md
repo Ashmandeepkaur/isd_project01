@@ -16,6 +16,7 @@ Assignment 3: Applying Design Patterns
 
 Assignment 4: Programming Paradigms
 
+Assignment 5: Algorithms, Documentation and Distribution
 
 ## Encapsulation
 Encapsulation is a key principle of object-oriented programming that involves bundling the data (attributes) and methods (functions) that operate on the data into a single unit or class.
