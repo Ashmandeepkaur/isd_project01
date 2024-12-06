@@ -16,6 +16,7 @@ Assignment 3: Applying Design Patterns
 
 Assignment 4: Programming Paradigms
 
+Assignment 5: Algorithms, Documentation and Distribution
 
 ## Encapsulation
 Encapsulation is a key principle of object-oriented programming that involves bundling the data (attributes) and methods (functions) that operate on the data into a single unit or class.
@@ -74,3 +75,8 @@ Key aspects of EDP in this application include:
 2.Event Handlers: Methods like on_lookup_client, on_select_account, on_apply_transaction, and on_exit serve as event handlers that respond to user actions. Each of these methods processes the user's input, performs the appropriate operations (like retrieving data or updating the interface), and may display messages or open new windows.
 
 3.Real-Time Updates: When a transaction is made (e.g., a deposit or withdrawal), the application updates the relevant data in real time. The AccountDetailsWindow sends a signal to the ClientLookupWindow when a balance changes, ensuring that the client’s bank account details are immediately reflected in the main window.
+
+
+## Filtering:
+
+Filtering in this application allows users to search and narrow down results based on specific criteria. It is incorporated across various modules, such as clients, transactions, and accounts, enabling users to view only relevant data. The filtering functionality uses dynamic query parameters, allowing for filtering by attributes like client name, account type, transaction date, and amount. This improves the user experience by providing faster access to the information they need, making the application more efficient and user-friendly.
